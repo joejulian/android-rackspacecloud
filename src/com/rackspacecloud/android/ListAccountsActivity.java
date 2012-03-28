@@ -417,7 +417,7 @@ public class ListAccountsActivity extends CloudListActivity{
 			} else {
 				hideAccountDialog();
 				if(app.isLoggingIn()){
-					showAlert("Login Failure", "Authentication failed.  Please check your User Name and API Key.");
+					showAlert("Login Failure", "Authentication failed.  Please check your User Name and Password.");
 				}
 			}
 		}
