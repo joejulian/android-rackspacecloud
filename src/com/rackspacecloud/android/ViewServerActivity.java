@@ -561,6 +561,10 @@ public class ViewServerActivity extends CloudActivity {
 
 	}
 	
+	private void showNetworkError() {
+	    showError(getString(R.string.network_error_occured), null);
+	}
+
 	private class SoftRebootServerTask extends AsyncTask<Void, Void, HttpBundle> {
 
 		private CloudServersException exception;
@@ -584,21 +588,25 @@ public class ViewServerActivity extends CloudActivity {
 
 		@Override
 		protected void onPostExecute(HttpBundle bundle) {
-			HttpResponse response = bundle.getResponse();
-			if (response != null) {
-				int statusCode = response.getStatusLine().getStatusCode();	
-				if(statusCode == 202){ showToast("Reboot successful"); }
-				if (statusCode != 202) {
-					CloudServersException cse = parseCloudServersException(response);
-					if ("".equals(cse.getMessage())) {
-						showError("There was a problem rebooting your server.", bundle);
-					} else {
-						showError("There was a problem rebooting your server: " + cse.getMessage(), bundle);
+			if (bundle != null) {
+				HttpResponse response = bundle.getResponse();
+				if (response != null) {
+					int statusCode = response.getStatusLine().getStatusCode();	
+					if(statusCode == 202){ showToast("Reboot successful"); }
+					if (statusCode != 202) {
+						CloudServersException cse = parseCloudServersException(response);
+						if ("".equals(cse.getMessage())) {
+							showError("There was a problem rebooting your server.", bundle);
+						} else {
+							showError("There was a problem rebooting your server: " + cse.getMessage(), bundle);
+						}
 					}
-				}
-			} else if (exception != null) {
-				showError("There was a problem rebooting your server: " + exception.getMessage(), bundle);
+				} else if (exception != null) {
+					showError("There was a problem rebooting your server: " + exception.getMessage(), bundle);
 
+				}
+			} else {
+			    showNetworkError();
 			}
 		}
 	}
@@ -626,22 +634,26 @@ public class ViewServerActivity extends CloudActivity {
 
 		@Override
 		protected void onPostExecute(HttpBundle bundle) {
-			HttpResponse response = bundle.getResponse();
-			if (response != null) {
-				int statusCode = response.getStatusLine().getStatusCode();	
-				if(statusCode == 202){ showToast("Reboot successful"); }
-				if (statusCode != 202) {
-					CloudServersException cse = parseCloudServersException(response);
-					if ("".equals(cse.getMessage())) {
-						showError("There was a problem rebooting your server.", bundle);
-					} else {
-						showError("There was a problem rebooting your server: " + cse.getMessage(), bundle);
-					}
-				}
-			} else if (exception != null) {
-				showError("There was a problem rebooting your server: " + exception.getMessage(), bundle);
+		    if (bundle != null) {
+		        HttpResponse response = bundle.getResponse();
+		        if (response != null) {
+		            int statusCode = response.getStatusLine().getStatusCode();	
+		            if(statusCode == 202){ showToast("Reboot successful"); }
+		            if (statusCode != 202) {
+		                CloudServersException cse = parseCloudServersException(response);
+		                if ("".equals(cse.getMessage())) {
+		                    showError("There was a problem rebooting your server.", bundle);
+		                } else {
+		                    showError("There was a problem rebooting your server: " + cse.getMessage(), bundle);
+		                }
+		            }
+		        } else if (exception != null) {
+		            showError("There was a problem rebooting your server: " + exception.getMessage(), bundle);
 
-			}
+		        }
+		    } else {
+		        showNetworkError();
+                    }
 		}
 	}
 
@@ -667,6 +679,7 @@ public class ViewServerActivity extends CloudActivity {
 
 		@Override
 		protected void onPostExecute(HttpBundle bundle) {
+		    if (bundle != null) {
 			HttpResponse response = bundle.getResponse();
 			if (response != null) {
 				int statusCode = response.getStatusLine().getStatusCode();			
@@ -685,7 +698,9 @@ public class ViewServerActivity extends CloudActivity {
 				showError("There was a problem resizing your server: " + exception.getMessage(), bundle);
 
 			}
-
+		    } else {
+		        showNetworkError();
+                    }
 		}
 	}
 
@@ -712,6 +727,7 @@ public class ViewServerActivity extends CloudActivity {
 
 		@Override
 		protected void onPostExecute(HttpBundle bundle) {
+		    if (bundle != null) {
 			HttpResponse response = bundle.getResponse();
 			if (response != null) {
 				int statusCode = response.getStatusLine().getStatusCode();
@@ -729,7 +745,10 @@ public class ViewServerActivity extends CloudActivity {
 				}
 			} else if (exception != null) {
 				showError("There was a problem deleting your server: " + exception.getMessage(), bundle);				
-			}			
+			}
+		    } else {
+		        showNetworkError();
+                    }
 		}
 	}
 
@@ -756,6 +775,7 @@ public class ViewServerActivity extends CloudActivity {
 
 		@Override
 		protected void onPostExecute(HttpBundle bundle) {
+		    if (bundle != null) {
 			HttpResponse response = bundle.getResponse();
 			if (response != null) {
 				int statusCode = response.getStatusLine().getStatusCode();	
@@ -775,6 +795,9 @@ public class ViewServerActivity extends CloudActivity {
 			else if (exception != null) {
 				showError("There was a problem renaming your server: " + exception.getMessage(), bundle);	
 			}
+		    } else {
+		        showNetworkError();
+                    }
 		}
 
 	}
@@ -801,6 +824,7 @@ public class ViewServerActivity extends CloudActivity {
 
 		@Override
 		protected void onPostExecute(HttpBundle bundle) {
+		    if (bundle != null) {
 			HttpResponse response = bundle.getResponse();
 			if (response != null) {
 				int statusCode = response.getStatusLine().getStatusCode();			
@@ -818,7 +842,9 @@ public class ViewServerActivity extends CloudActivity {
 			} else if (exception != null) {
 				showError("There was a problem rebuilding your server: " + exception.getMessage(), bundle);
 			}
-
+		    } else {
+		        showNetworkError();
+                    }
 		}
 	}
 
