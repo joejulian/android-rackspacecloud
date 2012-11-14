@@ -562,7 +562,7 @@ public class ViewServerActivity extends CloudActivity {
 	}
 	
 	private void showNetworkError() {
-	    showError("A network error occured.", null);
+	    showError(getString(R.string.network_error_occured), null);
 	}
 
 	private class SoftRebootServerTask extends AsyncTask<Void, Void, HttpBundle> {

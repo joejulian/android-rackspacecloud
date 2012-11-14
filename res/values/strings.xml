@@ -55,5 +55,6 @@
 <string name="virtual_ip_type">Virtual\nIp Type</string>
 <string name="request_lost">Request was lost</string>
 <string name="no_response_received">No response was received</string>
+<string name="network_error_occured">A network error occured</string>
 
 </resources>
