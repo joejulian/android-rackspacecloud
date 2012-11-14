@@ -203,8 +203,13 @@ public abstract class CloudActivity extends GaActivity{
 	protected final void showError(String message, HttpBundle bundle){
 		Intent viewIntent = new Intent(getApplicationContext(), ServerErrorActivity.class);
 		viewIntent.putExtra("errorMessage", message);
-		viewIntent.putExtra("response", bundle.getResponseText());
-		viewIntent.putExtra("request", bundle.getCurlRequest());
+		if (bundle != null) {
+		    viewIntent.putExtra("response", bundle.getResponseText());
+		    viewIntent.putExtra("request", bundle.getCurlRequest());
+		} else { //There was a network error.
+		    viewIntent.putExtra("response", "No response was received");
+		    viewIntent.putExtra("request", "Request was lost");
+		}
 		startActivity(viewIntent);
 	}
 	
