@@ -207,8 +207,8 @@ public abstract class CloudActivity extends GaActivity{
 		    viewIntent.putExtra("response", bundle.getResponseText());
 		    viewIntent.putExtra("request", bundle.getCurlRequest());
 		} else { //There was a network error.
-		    viewIntent.putExtra("response", "No response was received");
-		    viewIntent.putExtra("request", "Request was lost");
+		    viewIntent.putExtra("response", getString(R.string.no_response_received));
+		    viewIntent.putExtra("request", getString(R.string.request_lost));
 		}
 		startActivity(viewIntent);
 	}

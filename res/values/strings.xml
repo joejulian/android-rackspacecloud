@@ -53,5 +53,7 @@
 <string name="contact_us">877-934-0407</string>
 <string name="confirm_resize">Confirming the resize will destroy the saved copy of your original server.</string>
 <string name="virtual_ip_type">Virtual\nIp Type</string>
+<string name="request_lost">Request was lost</string>
+<string name="no_response_received">No response was received</string>
 
 </resources>
